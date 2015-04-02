@@ -1,0 +1,16 @@
+<%= form_for([@comment, @like], class: 'form-vertical') do |f| %>
+  <% if @like.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@like.errors.count, "error") %> prohibited this like from being saved:</h2>
+
+      <ul>
+      <% @like.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit (raw("<i class='fa fa-like'>Like</i>")) %>
+  </div>
+<% end %>

@@ -1,0 +1,32 @@
+<div class="row">
+<h2>
+  <%= @family.name %>
+</h2>
+  <div class="col-lg-6 col-md-6 col-sm-8">
+    <%= link_to (image_tag root_url + "/images/" + @family.images[0].filename, class: "showImage", alt: @family.images[0].filename), @family.images[0] %>
+  </div>
+  <% @family.members.each do |member| %>
+   <% if !member.new_record? %>
+     <div class="col-lg-2 col-xs-3 smMargin"class="memberBackground">
+        <div><%= member.name%></div>
+        <div class="pictureFrame">
+        <%= link_to (image_tag root_url + "/images/" + member.images[0].filename, class: "imageBorder" , alt: member.images[0].filename), member %></div>
+ <span><%= link_to (raw("<i class='fa fa-edit'>Edit</i>")), edit_member_path(member) %></span>
+        <span><%= link_to (raw("<i class='fa fa-remove'>Remove</i>")), member, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+   
+     </div>
+   <% end %>
+  <% end %>
+</div>
+<div class="row">
+<div class="centerText margins padding">
+<%= link_to (raw("<button class='btn btn-default margins'>Add Member</button>")),  new_family_member_path(params[:id]) %>
+<%= link_to (raw("<button class='btn btn-default margins'>Create Event</button")), new_family_event_path(params[:id]) %>
+<%= link_to (raw("<button class='btn btn-default margins'>View Events</button>")), family_events_path(params[:id]) %>
+<%= link_to (raw("<button class='btn btn-default margins'>View Family Members</button>")), family_members_path(params[:id]) %>
+<%= link_to (raw("<button class='btn btn-default margins'>View Family Images</button>")), family_images_path(params[:id]) %>
+<%= link_to (raw("<button class='btn btn-default margins'>Edit</button>")), edit_family_path(@family) %> 
+<%= link_to (raw("<button class='btn btn-default margins'>Back</button>")), families_path %>
+<%= link_to (raw("<button class='btn btn-default margins'>Calendar</button>")), "" %>
+</div>
+</div>

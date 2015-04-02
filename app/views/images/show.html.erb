@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-lg-12">
+    <p>
+      <strong>Description:</strong>
+      <%= @image.description %>
+    </p>
+  </div>
+
+
+  <div class="col-lg-12">
+    <%= image_tag root_url + "/images/" + @image.filename, class: "margins showImage", alt: @image.filename%>
+  </div>
+</div>
+<div class="row">
+
+  <div class="col-lg-6">
+    <span><%= link_to (raw("<i class='fa fa-edit'>Edit</i>")), edit_image_path(@image) %></span>
+        <span><%= link_to (raw("<i class='fa fa-remove'>Remove</i>")), @image, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+
+    <span><%= @image.likes.length %> likes </span>
+    <% if(current_user.likes.map{|like| like if(like.user == current_user && like.image == Image.find(params[:id]))}.compact.length == 0)  %>
+      <%= render('likes/like_image') %>
+    <% else %>
+      <%= render('likes/unlike_image') %>
+    <% end %>
+  </div>
+</div>
+<div class="row margins">
+  <% if @image.tags.length > 1 %>
+  <div class="col-lg-4 col-md-6 col-sm-4 margins inline">
+    <% @image.tags.each do |tag| %>
+      <% if !tag.new_record? %>
+        <div class="tag margins inline">
+          <span><%= tag.name %></span>
+	  <%= link_to edit_tag_path(tag) do  %>
+             <i class="fa fa-edit"></i>
+          <% end %>
+          <%= link_to (raw("<i class='fa fa-remove'></i>")), tag, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <% end %>
+  <div class="col-lg-4 col-md-6 col-sm-8 margins">
+    <%= render 'tags/form' %>
+  </div>
+
+</div>
+ <%= link_to (raw("<button class='btn btn-default'><i class='fa fa-arrow-left'></i>Back</button>")), family_path(@image.family || @image.member.family) %>
+

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @milestone.date %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @milestone.description %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @milestone.name %>
+</p>
+
+<%= link_to (raw("<button class='btn btn-default'>Edit</button>")), edit_milestone_path(@milestone) %> 
+<%= link_to (raw("<button class='btn btn-default'>Back</button>")), member_milestones_path(@milestone.member) %>

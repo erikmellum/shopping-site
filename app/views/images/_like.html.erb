@@ -1,0 +1,4 @@
+<%= form_for([@image, @like]) do |f| %>
+  <%= image.likes %>
+  <%= f.submit (raw("<i class='fa fa-like'>Like</i>"))%>
+<% end %>

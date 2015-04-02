@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @member.name %>
+</p>
+
+<%= link_to((image_tag root_url + "/images/" + @member.images[0].filename, class: "showImage margins", height: "250", alt: @member.images[0].filename), @member.images[0]) %>
+
+<p>
+  <strong>Description:</strong>
+  <%= @member.description %>
+</p>
+
+<p>
+  <strong>Dob:</strong>
+  <%= @member.dob %>
+</p>
+
+<p>
+  <strong>Member Family:</strong>
+  <%= @member.family.name %>
+</p>
+
+
+<%= link_to (raw("<button class='btn btn-default'>View all Images</button>")), member_images_path(params[:id]) %>
+<%= link_to (raw("<button class='btn btn-default'>View all Milestones</button>")), member_milestones_path(params[:id]) %>
+<%= link_to (raw("<button class='btn btn-default'>View all Hobbies</button>")), member_hobbies_path(params[:id]) %>
+
+<%= link_to (raw("<button class='btn btn-default'>Add Relationship</button>")), new_member_relationship_path(params[:id]) %>
+<%= link_to (raw("<button class='btn btn-default'>Add Milestone</button>")), new_member_milestone_path(params[:id]) %>
+<%= link_to (raw("<button class='btn btn-default'>Add Hobby</button>")), new_member_hobby_path(params[:id]) %>
+
+<%= link_to (raw("<button class='btn btn-default'>Edit</button>")), edit_member_path(@member) %> 
+<%= link_to (raw("<button class='btn btn-default'>Back</button>")), family_path(@member.family_id) %>

@@ -1,0 +1,23 @@
+<h1>Listing images</h1>
+
+    <% i = 0 %>
+    <div class="row">
+      <% @images.each do |image| %>
+        <% if i%3 == 0 %>
+          </div>
+          <div class="row">
+        <% end %> 
+        <% i=i+1 %>
+        <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6">
+          <div><%= if(image.description) then image.description else "No title" end %></div>
+          <div><%= link_to (image_tag root_url + "/images/" + image.filename, class: "imageBorder", alt: image.filename), image %></div>
+          <span><%= link_to (raw("<i class='fa fa-search'>Show</i>")), image %></span>
+          <span><%= link_to (raw("<i class='fa fa-edit'>Edit</i>")), edit_image_path(image) %></span>
+          <span><%= link_to (raw("<i class='fa fa-remove'>Remove</i>")), image, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+        </div>  
+     <% end %>
+   </div>
+<br>
+
+<%= link_to (raw("<button class='btn btn-default'>New Image</button>")), if(@images != nil && @images.first.family != nil) then new_family_image_path elsif(@images != nil && @images.first.member != nil) then  new_member_image_path  end%>
+<%= link_to (raw("<button class='btn btn-default'>Back</button>")), if(@images != nil && @images.first.family != nil) then family_path(@images.first.family) elsif(@images != nil && @images.first.member != nil) then member_path(@images.first.member) end %>

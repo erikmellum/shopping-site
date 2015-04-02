@@ -1,0 +1,15 @@
+<%= form_tag("/search", class: 'search-form',  method: "get") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <select name="type">
+    <option value="event">Event</option>
+    <option value="member">Member</option>
+    <option value="tag">Tag</option>
+    <option value="hobby">Hobby</option>
+    <option value="birthday">Birthday</option>
+    <option value="address">Address</option>
+    <option value="anniversary">Anniversary</option.
+  </select>
+  <%= submit_tag("Search") %>
+<% end %>
+

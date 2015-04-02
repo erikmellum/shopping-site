@@ -1,0 +1,24 @@
+<h1>Listing families</h1>
+    <% i = 0 %>
+    <div class="row">
+    <% @families.each do |family| %>
+        <% if(i%3 == 0) %>
+        </div>
+        <div class="row">
+        <% end %>
+        <% i=i+1 %>
+        <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6">
+        <div><%= family.name %></div>
+        <% if family.images.length >0 %>
+        <%=link_to( (image_tag root_url + "/images/" + family.images[0].filename, class: "imageBorder",  alt: family.images[0].filename), family) %><br>
+        <% end %>
+        <span><%= link_to (raw("<i class='fa fa-edit'>Edit</i>")), edit_family_path(family) %></span>
+        <span><%= link_to (raw("<i class='fa fa-remove'>Remove</i>")), family, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+        </div>
+    <% end %>
+
+   </div>
+   
+<br>
+
+<%= link_to (raw("<button class='btn btn-default'>New Family</button>")), new_family_path %>

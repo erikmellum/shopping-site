@@ -1,0 +1,30 @@
+<h1>Listing events</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.name %></td>
+        <td><%= event.location %></td>
+        <td><%= event.date %></td>
+        <td><%= link_to (raw("<i class='fa fa-search'>Show</i>")), event %></td>
+        <td><%= link_to (raw("<i class='fa fa-edit'>Edit</i>")), edit_event_path(event) %></td>
+        <td><%= link_to (raw("<i class='fa fa-remove'>Remove</i>")), event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event', new_family_event_path%>
+<%= link_to 'Back', family_path(params[:family_id]) %>

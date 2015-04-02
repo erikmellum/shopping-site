@@ -1,0 +1,29 @@
+<div class="row">
+
+<p>
+  <strong>Name:</strong>
+  <%= @event.name %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @event.location %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @event.date %>
+</p>
+<input ng-model="member_name">
+<%= form_for(@event) do |f| %>
+<div class="row event_members_div" ng-init="names= <%= @family.members.map { |m| m.name } %>">
+   <span ng-repeat="name in names | filter:member_name as results" class="event_members" ng-init="isSelected$index=false" ng-click="isSelected$index? isSelected$index=false:isSelected$index=true;" ng-class="{'fa fa-close selected': isSelected$index, 'fa fa-check not_selected': !isSelected$index}" name="{isSelected$index? 'member_id_'+ $index: 'unselected'}">
+  {{isSelected$index? "":"add"}} {{name}} {{isSelected$index? " added":""}}
+<input style="" id="myCheckbox$index" type="checkbox" name="member_id_$index"></span>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>
+<%= link_to (raw("<button class='btn btn-default'>Edit</button>")), edit_event_path(@event) %> 
+<%= link_to (raw("<button class='btn btn-default'>Back</button>")), family_events_path(@event.family) %>
